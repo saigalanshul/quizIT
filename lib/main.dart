@@ -92,7 +92,8 @@ class _ListPageState extends State<ListPage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => Teacher())
+                  builder: (BuildContext context) =>
+                      Teacher(lessons.indexOf(lesson)))
           );
 
       },
@@ -112,7 +113,7 @@ class _ListPageState extends State<ListPage> {
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: lessons.length,
+        itemCount: 5,
         itemBuilder: (BuildContext context, int index) {
           return makeCard(lessons[index]);
         },

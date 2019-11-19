@@ -5,7 +5,9 @@ import './lesson.dart';
 
 class DetailPage extends StatelessWidget {
   final Lesson lesson;
+
   DetailPage({Key key, this.lesson}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final levelIndicator = Container(
@@ -129,9 +131,11 @@ class DetailPage extends StatelessWidget {
         child: Column(
           children: <Widget>[
             DrawerHeader(child: Text("QuizIT")),
-            ListTile(title: Text("Logout"),
+            ListTile(
+              title: Text("Logout"),
               leading: Icon(Icons.power_settings_new),
-              onTap: () => FirebaseAuth.instance.signOut(),)
+              onTap: () => FirebaseAuth.instance.signOut(),
+            )
           ],
         ),
       ),

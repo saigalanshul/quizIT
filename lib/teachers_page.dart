@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'TeacherReq.dart';
 
 class Teacher extends StatefulWidget {
+  Teacher(this.quizNum);
+
+  final int quizNum;
+
   @override
   State<StatefulWidget> createState() {
     return TeacherState();
@@ -23,7 +27,7 @@ class TeacherState extends State<Teacher> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Upload Quetion"),
+        title: Text("Upload Question"),
         centerTitle: true,
         backgroundColor: Colors.black54,
       ),
@@ -54,7 +58,9 @@ class TeacherState extends State<Teacher> {
                 children: <Widget>[
                   //login button
                   RaisedButton(
-                    onPressed: () {},
+                    onPressed: () =>
+                        authenticate.uploadQues(
+                            formkey, context, widget.quizNum),
                     color: Colors.redAccent,
                     child: Text(
                       "Upload Question",

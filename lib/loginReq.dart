@@ -40,7 +40,10 @@ class Authenticate {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    ListPage(title: 'QUIZ IT', isTeacher: isTeacher,),
+                    ListPage(
+                      title: 'QUIZ IT',
+                      isTeacher: isTeacher,
+                    ),
               ),
               ModalRoute.withName(':'));
         else
@@ -48,7 +51,10 @@ class Authenticate {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    ListPage(title: 'QUIZ IT', isTeacher: isTeacher,),
+                    ListPage(
+                      title: 'QUIZ IT',
+                      isTeacher: isTeacher,
+                    ),
               ),
               ModalRoute.withName(':'));
       }
@@ -93,7 +99,10 @@ class Authenticate {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    ListPage(title: 'QUIZ IT', isTeacher: isTeacher,),
+                    ListPage(
+                      title: 'QUIZ IT',
+                      isTeacher: isTeacher,
+                    ),
               ),
               ModalRoute.withName(':'));
         else
@@ -101,7 +110,10 @@ class Authenticate {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    ListPage(title: 'QUIZ IT', isTeacher: isTeacher,),
+                    ListPage(
+                      title: 'QUIZ IT',
+                      isTeacher: isTeacher,
+                    ),
               ),
               ModalRoute.withName(':'));
       }
