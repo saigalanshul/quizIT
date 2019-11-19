@@ -49,11 +49,11 @@ class LoginState extends State<Login> {
           key: formkey,
           child: Column(
             children: <Widget>[
-              Image.asset(
-                'images/appLogo.png',
-                width: 150.0,
-                height: 150.0,
-              ),
+              //Image.asset(
+              //'images/appLogo.png',
+              //width: 150.0,
+              // height: 150.0,
+              // ),
               TextFormField(
                 decoration: InputDecoration(
                   hintText: 'Email',

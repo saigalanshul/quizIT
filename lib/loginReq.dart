@@ -42,17 +42,29 @@ class Authenticate {
     FormState state = formkey.currentState;
     if (state.validate()) {
       state.save();
-      AuthResult result = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: details["emailID"], password: details["pass"]);
-      print(result.toString());
+      print(details);
+      try {
+        AuthResult result = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+            email: details["emailID"], password: details["pass"]);
+        print(result.toString());
+      }
+      catch (e) {
+        print(e.toString());
+      }
+//
 //      if(result.user!=null){
       print("in");
       firebaseUser = await FirebaseAuth.instance.currentUser();
       if (firebaseUser != null) {
         details.remove("pass");
         print(details);
-        await Firestore.instance.collection("Users").add(details);
+        await Firestore.instance.collection("Users").document(
+            firebaseUser.uid).setData({
+          'Name': details["name"],
+          'emailID': details["emailID"],
+          'RegNo': details["regno"]
+        });
         Navigator.push(
             context,
             MaterialPageRoute(
