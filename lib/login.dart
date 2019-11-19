@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sepm_project/sign_up_page.dart';
-//import './secondpage.dart';
-//import './thirdpage.dart';
+
 import './main.dart';
 
 class Login extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new LoginState();
+    return LoginState();
   }
 }
 
 class LoginState extends State<Login> {
-  final TextEditingController _userController = new TextEditingController();
-  final TextEditingController _passwordController = new TextEditingController();
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   String _welcomeString = "";
 
   void _erase() {
@@ -40,7 +39,7 @@ class LoginState extends State<Login> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => new ListPage(title: 'QUIZ IT'),
+              builder: (context) => ListPage(title: 'QUIZ IT'),
             ));
       } else {
         _welcomeString = "Please Sign Up First";
@@ -56,130 +55,111 @@ class LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Login"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Login"),
         centerTitle: true,
         backgroundColor: Colors.black54,
       ),
       backgroundColor: Colors.blueGrey,
-      body: new Container(
-          alignment: Alignment.topCenter,
-          child: new ListView(
-            children: <Widget>[
-              new Image.asset(
-                'images/appLogo.png',
-                width: 150.0,
-                height: 150.0,
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: <Widget>[
+            Image.asset(
+              'images/appLogo.png',
+              width: 150.0,
+              height: 150.0,
+            ),
+            TextField(
+              controller: _userController,
+              decoration: InputDecoration(
+                hintText: 'Username',
+                icon: Icon(Icons.person),
               ),
-              new Container(
-                width: 360.0,
-                height: 180.0,
-                color: Colors.blueGrey,
-                child: new Column(
-                  children: <Widget>[
-                    new TextField(
-                      controller: _userController,
-                      decoration: new InputDecoration(
-                        hintText: 'Username',
-                        icon: new Icon(Icons.person),
-                      ),
+            ),
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(
+                hintText: 'Password',
+                icon: Icon(Icons.lock),
+              ),
+              obscureText: true,
+            ),
+            Padding(padding: EdgeInsets.all(10.5)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                //login button
+                RaisedButton(
+                  onPressed: _showWelcome,
+                  color: Colors.redAccent,
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
                     ),
-                    new TextField(
-                      controller: _passwordController,
-                      decoration: new InputDecoration(
-                        hintText: 'Password',
-                        icon: new Icon(Icons.lock),
-                      ),
-                      obscureText: true,
-                    ),
-                    new Padding(padding: new EdgeInsets.all(10.5)),
-                    new Center(
-                      child: new Row(
-                        children: <Widget>[
-                          //login button
-                          new Container(
-                            margin: const EdgeInsets.only(left: 40),
-                            child: new RaisedButton(
-                              onPressed: _showWelcome,
-                              color: Colors.redAccent,
-                              child: new Text(
-                                "Login",
-                                style: new TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          // clear button
-                          new Container(
-                            margin: const EdgeInsets.only(left: 150),
-                            child: new RaisedButton(
-                              onPressed: _erase,
-                              color: Colors.redAccent,
-                              child: new Text(
-                                "Clear",
-                                style: new TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
-              ),
-              new Padding(padding: new EdgeInsets.all(8.5)),
-              new Center(
-                  child: new Row(
-                children: <Widget>[
-                  // Sign up button
-                  new Container(
-                    margin: const EdgeInsets.only(left: 150),
-                    child: new RaisedButton(
-                      onPressed:() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                               sign_up_page(),
-                            ));
-                      },
-                      color: Colors.redAccent,
-                      child: new Text(
-                        "Sign Up",
-                        style: new TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
-                      ),
+
+                // clear button
+                RaisedButton(
+                  onPressed: _erase,
+                  color: Colors.redAccent,
+                  child: Text(
+                    "Clear",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
                     ),
                   ),
-                ],
-              )),
-              new Padding(padding: new EdgeInsets.all(10.5)),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  new Text(
-                    _userController.text.isEmpty ||
-                            _passwordController.text.isEmpty
-                        ? "Please Enter Your Username and Password"
-                        : "Welcome, $_welcomeString",
-                    style: new TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
+                )
+              ],
+            ),
+            Padding(padding: EdgeInsets.all(8.5)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                // Sign up button
+                RaisedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => sign_up_page(),
+                        ));
+                  },
+                  color: Colors.redAccent,
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
-                ],
-              )
-            ],
-          )),
+                ),
+              ],
+            ),
+            Padding(padding: EdgeInsets.all(10.5)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  _userController.text.isEmpty ||
+                      _passwordController.text.isEmpty
+                      ? "Please Enter Your Username and Password"
+                      : "Welcome, $_welcomeString",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

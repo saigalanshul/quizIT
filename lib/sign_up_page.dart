@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import './detail_page.dart';
-import './lesson.dart';
-import './login.dart';
 
 
 class sign_up_page extends StatefulWidget {
@@ -17,6 +14,8 @@ class sign_up_pageState extends State<sign_up_page> {
   final TextEditingController _userName = new TextEditingController();
   final TextEditingController _userNumber = new TextEditingController();
   final TextEditingController _useremail= new TextEditingController();
+  final TextEditingController _userPassword = new TextEditingController();
+
 
   String _welcomeString = "";
 
@@ -53,6 +52,19 @@ class sign_up_pageState extends State<sign_up_page> {
 
           obscureText: true,
         ),
+
+
+            new TextField(
+              controller: _userPassword,
+              decoration: new InputDecoration(
+                hintText: 'Password',
+                icon: new Icon(Icons.lock_outline),
+
+              ),
+
+
+              obscureText: true,
+            ),
 
         new TextField(
           controller: _useremail,
