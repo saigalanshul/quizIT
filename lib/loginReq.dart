@@ -35,7 +35,7 @@ class Authenticate {
             .collection(isTeacher ? "Teachers" : "Users")
             .document(firebaseUser.uid)
             .get();
-        if (isTeacher)
+        if (userData.exists && isTeacher)
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
@@ -46,7 +46,7 @@ class Authenticate {
                     ),
               ),
               ModalRoute.withName(':'));
-        else
+        else if (!isTeacher && userData.exists)
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(

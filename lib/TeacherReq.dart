@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sepm_project/loginReq.dart';
 
-FirebaseUser firebaseUser;
+//FirebaseUser firebaseUser;
 
 class Authen {
   Map<String, dynamic> details;
@@ -22,7 +21,7 @@ class Authen {
     FormState state = formkey.currentState;
     if (state.validate()) {
       state.save();
-      await Firestore.instance
+      await userData.reference
           .collection("Quizes")
           .document("quiz" + num.toString())
           .setData({
