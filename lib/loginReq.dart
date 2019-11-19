@@ -29,11 +29,11 @@ class Authenticate {
               email: details["emailID"], password: details["pass"]);
       if (result.user != null) {
         firebaseUser = result.user;
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (context) => ListPage(title: 'QUIZ IT'),
-            ));
+            ), ModalRoute.withName(':'));
       }
     }
   }
@@ -65,11 +65,11 @@ class Authenticate {
           'emailID': details["emailID"],
           'RegNo': details["regno"]
         });
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (context) => ListPage(title: 'QUIZ IT'),
-            ));
+            ), ModalRoute.withName(':'));
       }
     }
   }
