@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sepm_project/loginReq.dart';
 import 'package:sepm_project/sign_up_page.dart';
+import 'package:sepm_project/teachers_page.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -49,11 +50,7 @@ class LoginState extends State<Login> {
           key: formkey,
           child: Column(
             children: <Widget>[
-              //Image.asset(
-              //'images/appLogo.png',
-              //width: 150.0,
-              // height: 150.0,
-              // ),
+
               TextFormField(
                 decoration: InputDecoration(
                   hintText: 'Email',
@@ -80,7 +77,7 @@ class LoginState extends State<Login> {
                     },
                     color: Colors.redAccent,
                     child: Text(
-                      "Login",
+                      "Student's Login",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -90,10 +87,16 @@ class LoginState extends State<Login> {
 
                   // clear button
                   RaisedButton(
-                    onPressed: _erase,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => Teacher(),
+                          ));
+                    },
                     color: Colors.redAccent,
                     child: Text(
-                      "Clear",
+                      "Teacher's Login",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
