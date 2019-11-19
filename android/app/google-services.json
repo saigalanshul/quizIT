@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "493656782208",
+    "firebase_url": "https://quizit-a6064.firebaseio.com",
+    "project_id": "quizit-a6064",
+    "storage_bucket": "quizit-a6064.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493656782208:android:6b18c02d969f4bd970fd65",
+        "android_client_info": {
+          "package_name": "com.buildappswithanshul.sepm_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493656782208-g8bd4jt7ct4n59h5vid9vf06mfv9jp9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe-4-ORcc8lKg0sAYVXK27nTsft68s-ec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493656782208-g8bd4jt7ct4n59h5vid9vf06mfv9jp9n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
