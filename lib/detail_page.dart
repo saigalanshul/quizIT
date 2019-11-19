@@ -1,5 +1,7 @@
-import './lesson.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import './lesson.dart';
 
 class DetailPage extends StatelessWidget {
   final Lesson lesson;
@@ -120,6 +122,19 @@ class DetailPage extends StatelessWidget {
     );
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("QuizIT"),
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            DrawerHeader(child: Text("QuizIT")),
+            ListTile(title: Text("Logout"),
+              leading: Icon(Icons.power_settings_new),
+              onTap: () => FirebaseAuth.instance.signOut(),)
+          ],
+        ),
+      ),
       body: Column(
         children: <Widget>[topContent, bottomContent],
       ),
