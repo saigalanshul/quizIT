@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sepm_project/main.dart';
 
 FirebaseUser firebaseUser;
+DocumentSnapshot userData;
 
 class Authenticate {
   Map<String, dynamic> details;
@@ -20,7 +21,8 @@ class Authenticate {
 
   void getRegNo(String pass) => details.addAll({"regno": int.parse(pass)});
 
-  void Login(GlobalKey<FormState> formkey, BuildContext context) async {
+  void Login(GlobalKey<FormState> formkey, BuildContext context,
+      bool isTeacher) async {
     FormState state = formkey.currentState;
     if (state.validate()) {
       state.save();
@@ -29,16 +31,32 @@ class Authenticate {
               email: details["emailID"], password: details["pass"]);
       if (result.user != null) {
         firebaseUser = result.user;
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ListPage(title: 'QUIZ IT'),
-            ), ModalRoute.withName(':'));
+        userData = await Firestore.instance
+            .collection(isTeacher ? "Teachers" : "Users")
+            .document(firebaseUser.uid)
+            .get();
+        if (isTeacher)
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ListPage(title: 'QUIZ IT', isTeacher: isTeacher,),
+              ),
+              ModalRoute.withName(':'));
+        else
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ListPage(title: 'QUIZ IT', isTeacher: isTeacher,),
+              ),
+              ModalRoute.withName(':'));
       }
     }
   }
 
-  void SignUp(GlobalKey<FormState> formkey, BuildContext context) async {
+  void SignUp(GlobalKey<FormState> formkey, BuildContext context,
+      bool isTeacher) async {
     FormState state = formkey.currentState;
     if (state.validate()) {
       state.save();
@@ -48,8 +66,7 @@ class Authenticate {
             .createUserWithEmailAndPassword(
             email: details["emailID"], password: details["pass"]);
         print(result.toString());
-      }
-      catch (e) {
+      } catch (e) {
         print(e.toString());
       }
 //
@@ -59,17 +76,34 @@ class Authenticate {
       if (firebaseUser != null) {
         details.remove("pass");
         print(details);
-        await Firestore.instance.collection("Users").document(
-            firebaseUser.uid).setData({
+        await Firestore.instance
+            .collection(isTeacher ? "Teachers" : "Users")
+            .document(firebaseUser.uid)
+            .setData({
           'Name': details["name"],
           'emailID': details["emailID"],
           'RegNo': details["regno"]
         });
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ListPage(title: 'QUIZ IT'),
-            ), ModalRoute.withName(':'));
+        userData = await Firestore.instance
+            .collection(isTeacher ? "Teachers" : "Users")
+            .document(firebaseUser.uid)
+            .get();
+        if (isTeacher)
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ListPage(title: 'QUIZ IT', isTeacher: isTeacher,),
+              ),
+              ModalRoute.withName(':'));
+        else
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    ListPage(title: 'QUIZ IT', isTeacher: isTeacher,),
+              ),
+              ModalRoute.withName(':'));
       }
     }
   }

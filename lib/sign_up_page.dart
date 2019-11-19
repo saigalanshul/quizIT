@@ -77,9 +77,13 @@ class sign_up_pageState extends State<sign_up_page> {
 //            obscureText: true,
             ),
             RaisedButton(
-              onPressed: () => authenticate.SignUp(formkey, context),
-              child: Text("SignUp"),
-            )
+              onPressed: () => authenticate.SignUp(formkey, context, false),
+              child: Text("S SignUp"),
+            ),
+            RaisedButton(
+              onPressed: () => authenticate.SignUp(formkey, context, true),
+              child: Text("T SignUp"),
+            ),
           ]),
         ),
       ),

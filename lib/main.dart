@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sepm_project/teachers_page.dart';
 
 import './detail_page.dart';
 import './lesson.dart';
 import './login.dart';
+
 
 void main() => runApp(new MyApp());
 
@@ -23,8 +25,8 @@ class MyApp extends StatelessWidget {
 }
 
 class ListPage extends StatefulWidget {
-  ListPage({Key key, this.title}) : super(key: key);
-
+  ListPage({Key key, this.title, @required this.isTeacher}) : super(key: key);
+  final bool isTeacher;
   final String title;
 
   @override
@@ -81,10 +83,18 @@ class _ListPageState extends State<ListPage> {
       trailing:
       Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DetailPage(lesson: lesson)));
+        if (!widget.isTeacher)
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DetailPage(lesson: lesson)));
+        else
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => Teacher())
+          );
+
       },
     );
 

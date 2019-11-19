@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sepm_project/loginReq.dart';
 import 'package:sepm_project/sign_up_page.dart';
-import 'package:sepm_project/teachers_page.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -73,7 +72,7 @@ class LoginState extends State<Login> {
                   //login button
                   RaisedButton(
                     onPressed: () {
-                      authenticate.Login(formkey, context);
+                      authenticate.Login(formkey, context, false);
                     },
                     color: Colors.redAccent,
                     child: Text(
@@ -88,11 +87,14 @@ class LoginState extends State<Login> {
                   // clear button
                   RaisedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => Teacher(),
-                          ));
+                      // Navigator.push(
+                      //   context,
+                      // MaterialPageRoute(
+                      // builder: (BuildContext context) => Teacher(),
+
+                      authenticate.Login(formkey, context, true);
+
+                      //));
                     },
                     color: Colors.redAccent,
                     child: Text(
