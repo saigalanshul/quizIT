@@ -1,12 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import './lesson.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final Lesson lesson;
+  final int num;
 
-  DetailPage({Key key, this.lesson}) : super(key: key);
+  DetailPage({Key key, this.lesson, this.num}) : super(key: key);
+
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  DocumentSnapshot snapshot;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +23,7 @@ class DetailPage extends StatelessWidget {
       child: Container(
         child: LinearProgressIndicator(
             backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-            value: lesson.indicatorValue,
+            value: widget.lesson.indicatorValue,
             valueColor: AlwaysStoppedAnimation(Colors.green)),
       ),
     );
@@ -25,7 +34,7 @@ class DetailPage extends StatelessWidget {
           border: new Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(5.0)),
       child: new Text(
-        "\$" + lesson.price.toString(),
+        "\$" + widget.lesson.price.toString(),
         style: TextStyle(color: Colors.white),
       ),
     );
@@ -46,7 +55,7 @@ class DetailPage extends StatelessWidget {
         ),
         SizedBox(height: 10.0),
         Text(
-          lesson.title,
+          widget.lesson.title,
           style: TextStyle(color: Colors.white, fontSize: 25.0),
         ),
         SizedBox(height: 15),
@@ -59,7 +68,7 @@ class DetailPage extends StatelessWidget {
                 child: Padding(
                     padding: EdgeInsets.only(left: 7.50),
                     child: Text(
-                      lesson.level,
+                      widget.lesson.level,
                       style: TextStyle(color: Colors.white),
                     ))),
             Expanded(flex: 1, child: coursePrice)
@@ -72,7 +81,10 @@ class DetailPage extends StatelessWidget {
       children: <Widget>[
         Container(
             padding: EdgeInsets.only(left: 10.0),
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * 0.5,
             decoration: new BoxDecoration(
               image: new DecorationImage(
                 image: new AssetImage("drive-steering-wheel.jpg"),
@@ -80,9 +92,15 @@ class DetailPage extends StatelessWidget {
               ),
             )),
         Container(
-          height: MediaQuery.of(context).size.height * 0.5,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height * 0.5,
           padding: EdgeInsets.all(40.0),
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery
+              .of(context)
+              .size
+              .width,
           decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, .9)),
           child: Center(
             child: topContentText,
@@ -101,27 +119,9 @@ class DetailPage extends StatelessWidget {
       ],
     );
 
-    final bottomContentText = Text(
-      lesson.content,
-      style: TextStyle(fontSize: 18.0),
-    );
-    final readButton = Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0),
-        width: MediaQuery.of(context).size.width,
-        child: RaisedButton(
-          onPressed: () => {},
-          color: Color.fromRGBO(58, 66, 86, 1.0),
-          child: Text("Submit", style: TextStyle(color: Colors.white)),
-        ));
-    final bottomContent = Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.all(40.0),
-      child: Center(
-        child: Column(
-          children: <Widget>[bottomContentText, readButton],
-        ),
-      ),
-    );
+    Widget bottomContent() {
+      return SizedBox();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -140,7 +140,7 @@ class DetailPage extends StatelessWidget {
         ),
       ),
       body: Column(
-        children: <Widget>[topContent, bottomContent],
+        children: <Widget>[topContent],
       ),
     );
   }

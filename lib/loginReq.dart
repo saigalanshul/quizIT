@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sepm_project/main.dart';
+import 'package:sepm_project/selectTeacher.dart';
 
 FirebaseUser firebaseUser;
 DocumentSnapshot userData;
@@ -51,10 +52,7 @@ class Authenticate {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    ListPage(
-                      title: 'QUIZ IT',
-                      isTeacher: isTeacher,
-                    ),
+                    SelectTeacher(),
               ),
               ModalRoute.withName(':'));
       }
