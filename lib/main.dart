@@ -103,7 +103,8 @@ class _ListPageState extends State<ListPage> {
               MaterialPageRoute(
                   builder: (context) =>
                       DetailPage(
-                          lesson: lesson, num: lessons.indexOf(lesson))));
+                        lesson: lesson,
+                        quiz: quizes.documents[lessons.indexOf(lesson)],)));
         else
           Navigator.push(
               context,

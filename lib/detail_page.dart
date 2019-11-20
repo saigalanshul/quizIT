@@ -6,16 +6,16 @@ import './lesson.dart';
 
 class DetailPage extends StatefulWidget {
   final Lesson lesson;
-  final int num;
+  final DocumentSnapshot quiz;
 
-  DetailPage({Key key, this.lesson, this.num}) : super(key: key);
+  DetailPage({Key key, this.lesson, this.quiz}) : super(key: key);
 
   @override
   _DetailPageState createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
-  DocumentSnapshot snapshot;
+//  DocumentSnapshot snapshot;
 
   @override
   Widget build(BuildContext context) {
@@ -43,59 +43,33 @@ class _DetailPageState extends State<DetailPage> {
       //crossAxisAlignment: CrossAxisAlignment.start,
 
       children: <Widget>[
-        SizedBox(height: 100.0),
-        Icon(
-          Icons.home,
-          color: Colors.white,
-          size: 40.0,
-        ),
-        Container(
-          width: 90.0,
-          child: new Divider(color: Colors.green),
-        ),
-        SizedBox(height: 10.0),
         Text(
           widget.lesson.title,
           style: TextStyle(color: Colors.white, fontSize: 25.0),
         ),
         SizedBox(height: 15),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Expanded(flex: 1, child: levelIndicator),
-            Expanded(
-                flex: 6,
-                child: Padding(
-                    padding: EdgeInsets.only(left: 7.50),
-                    child: Text(
-                      widget.lesson.level,
-                      style: TextStyle(color: Colors.white),
-                    ))),
-            Expanded(flex: 1, child: coursePrice)
-          ],
-        ),
       ],
     );
 
     final topContent = Stack(
       children: <Widget>[
-        Container(
-            padding: EdgeInsets.only(left: 10.0),
-            height: MediaQuery
-                .of(context)
-                .size
-                .height * 0.5,
-            decoration: new BoxDecoration(
-              image: new DecorationImage(
-                image: new AssetImage("drive-steering-wheel.jpg"),
-                fit: BoxFit.cover,
-              ),
-            )),
+//        Container(
+//            padding: EdgeInsets.only(left: 10.0),
+//            height: MediaQuery
+//                .of(context)
+//                .size
+//                .height * 0.5,
+//            decoration: new BoxDecoration(
+//              image: new DecorationImage(
+//                image: new AssetImage("drive-steering-wheel.jpg"),
+//                fit: BoxFit.cover,
+//              ),
+//            )),
         Container(
           height: MediaQuery
               .of(context)
               .size
-              .height * 0.5,
+              .height * 0.15,
           padding: EdgeInsets.all(40.0),
           width: MediaQuery
               .of(context)
@@ -106,21 +80,35 @@ class _DetailPageState extends State<DetailPage> {
             child: topContentText,
           ),
         ),
-        Positioned(
-          left: 8.0,
-          top: 60.0,
-          child: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(Icons.arrow_back, color: Colors.white),
-          ),
-        )
       ],
     );
 
     Widget getbottomContent() {
-      return SizedBox();
+      return Expanded(
+        child: ListView.builder(
+          itemCount: widget.quiz.data.length,
+          itemBuilder: (BuildContext context, int c) {
+            print(widget.quiz.data["ques" + c.toString()]);
+            return Card(
+              margin: EdgeInsets.all(10.0),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text("Q" + (c + 1).toString() + ": " +
+                        widget.quiz.data["ques" + c.toString()].toString()),
+                    TextField(decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.question_answer),
+                        hintText: "Ans"
+                    ),),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      );
     }
 
     return Scaffold(
@@ -140,7 +128,14 @@ class _DetailPageState extends State<DetailPage> {
         ),
       ),
       body: Column(
-        children: <Widget>[topContent],
+        children: <Widget>[
+          topContent,
+          getbottomContent(),
+          RaisedButton(
+            onPressed: null,
+            child: Text("Submit"),
+          )
+        ],
       ),
     );
   }
