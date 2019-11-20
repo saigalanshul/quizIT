@@ -84,6 +84,7 @@ class _DetailPageState extends State<DetailPage> {
     );
 
     Widget getbottomContent() {
+      Map<String, String>x;
       return Expanded(
         child: ListView.builder(
           itemCount: widget.quiz.data.length,
@@ -97,7 +98,8 @@ class _DetailPageState extends State<DetailPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("Q" + (c + 1).toString() + ": " +
-                        widget.quiz.data["ques" + c.toString()].toString()),
+                        widget.quiz.data["ques" + c.toString()].keys.elementAt(
+                            0).toString()),
                     TextField(decoration: InputDecoration(
                         prefixIcon: Icon(Icons.question_answer),
                         hintText: "Ans"
