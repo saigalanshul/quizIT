@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sepm_project/teachers_page.dart';
@@ -25,9 +26,11 @@ class MyApp extends StatelessWidget {
 }
 
 class ListPage extends StatefulWidget {
-  ListPage({Key key, this.title, @required this.isTeacher}) : super(key: key);
+  ListPage({Key key, this.title, @required this.isTeacher, this.teacherref})
+      : super(key: key);
   final bool isTeacher;
   final String title;
+  final DocumentReference teacherref;
 
   @override
   _ListPageState createState() => _ListPageState();
@@ -35,11 +38,22 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   List lessons;
+  QuerySnapshot quizes;
+  bool gotQuizes;
+
+  void getQuizes() async {
+    quizes = await widget.teacherref.collection("Quizes").getDocuments();
+    setState(() {
+      gotQuizes = true;
+    });
+  }
 
   @override
   void initState() {
     lessons = getLessons();
     super.initState();
+    gotQuizes = false;
+    getQuizes();
   }
 
   @override
@@ -97,7 +111,6 @@ class _ListPageState extends State<ListPage> {
                   builder: (BuildContext context) =>
                       Teacher(lessons.indexOf(lesson)))
           );
-
       },
     );
 
@@ -112,14 +125,14 @@ class _ListPageState extends State<ListPage> {
 
     final makeBody = Container(
       // decoration: BoxDecoration(color: Color.fromRGBO(58, 66, 86, 1.0)),
-      child: ListView.builder(
+      child: (widget.isTeacher || gotQuizes) ? ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: 5,
+        itemCount: widget.isTeacher ? 5 : quizes.documents.length,
         itemBuilder: (BuildContext context, int index) {
           return makeCard(lessons[index]);
         },
-      ),
+      ) : CircularProgressIndicator(),
     );
 
     final makeBottom = Container(

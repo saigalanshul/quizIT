@@ -119,7 +119,7 @@ class _DetailPageState extends State<DetailPage> {
       ],
     );
 
-    Widget bottomContent() {
+    Widget getbottomContent() {
       return SizedBox();
     }
 

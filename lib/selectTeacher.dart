@@ -41,6 +41,7 @@ class _SelectTeacherState extends State<SelectTeacher> {
                         builder: (context) => ListPage(
                           title: 'QUIZ IT',
                           isTeacher: false,
+                          teacherref: teachers.documents[c].reference,
                         ),
                       ),
                     ),
