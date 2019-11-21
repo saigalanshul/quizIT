@@ -108,10 +108,7 @@ class Authenticate {
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    ListPage(
-                      title: 'QUIZ IT',
-                      isTeacher: isTeacher,
-                    ),
+                    SelectTeacher(),
               ),
               ModalRoute.withName(':'));
       }
